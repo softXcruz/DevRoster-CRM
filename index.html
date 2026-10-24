@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevRoster | Employee Management</title>
+    <meta name="description" content="CRM for managing employees and departments of a tech company. Project built with HTML, JavaScript, Tailwind CSS and json-server.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%234338ca%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22>D</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/css/output.css">
+</head>
+<body class="bg-slate-100">
+    <div class="flex min-h-screen">
+        <aside class="w-72 shrink-0 bg-slate-900 px-4 py-6">
+            <!-- Title -->
+            <div class="px-3.5 pb-5 text-3xl font-bold text-white">
+                <span>&lt;</span>Dev<span class="text-indigo-300">Roster</span><span class="text-indigo-300">/&gt;</span>
+            </div>
+
+            <!-- Navegation -->
+            <nav class="flex flex-col gap-2">
+                <a href="./index.html" aria-current="page"
+                    class="rounded-lg px-3.5 py-3 text-sm text-slate-300 hover:bg-slate-800 aria-[current=page]:bg-indigo-900 aria-[current=page]:font-semibold aria-[current=page]:text-white aria-[current=page]:hover:bg-indigo-900">
+                    Employees
+                </a>
+                <a href="./departments.html"
+                    class="rounded-lg px-3.5 py-3 text-sm text-slate-300 hover:bg-slate-800 aria-[current=page]:bg-indigo-900 aria-[current=page]:font-semibold aria-[current=page]:text-white aria-[current=page]:hover:bg-indigo-900">
+                    Departments
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main container -->
+        <main class="min-w-0 flex-1 p-8">
+            <!-- Title + button add employee -->
+            <div class="flex items-center justify-between gap-3">
+                <div class="flex items-start flex-col gap-1">
+                    <h1 class="text-2xl font-bold text-slate-950">
+                        Employees
+                    </h1>
+                    <p class="text-slate-500 text-sm">
+                        Manage employee information for the company.
+                    </p>
+                </div>
+                <button 
+                    type="button"
+                    id="addEmployeeBtn"
+                    class="flex items-center gap-2 cursor-pointer rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Add Employee
+                </button>
+            </div>
+
+            <!-- Table employees -->
+            <div id="employeeTable" class="mt-8 overflow-hidden rounded-xl border border-slate-200 bg-white">
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-240 table-fixed border-collapse">
+                        <thead class="bg-slate-900">
+                            <tr>
+                                <th scope="col"
+                                    class="w-64 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-50">
+                                    Employee</th>
+                                <th scope="col"
+                                    class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-50">Email
+                                </th>
+                                <th scope="col"
+                                    class="w-36 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-50">
+                                    Cellphone</th>
+                                <th scope="col"
+                                    class="w-20 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-50">Age
+                                </th>
+                                <th scope="col"
+                                    class="w-40 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-50">
+                                    Department</th>
+                                <th scope="col"
+                                    class="w-44 px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-50">
+                                    Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeesTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- department modal -->
+    <div id="employeeModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4 backdrop-blur-xs">
+        <!-- Modal Box -->
+        <div 
+            role="dialog"
+            aria-modal="true"
+            arialabelledby="employeeModalTitle"
+            class="w-full max-w-lg rounded-xl bg-white shado-xl"
+        >
+            <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+                <h2 id="employeeModalTitle" class="text-lg font-semibold text-slate-900">
+                    New Employee
+                </h2>
+                <button
+                    type="button"
+                    data-close
+                    aria-label="Close"
+                    class="cursor-pointer rounded-lg p-1.5 text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Form -->
+            <form id="employeeForm" class="flex flex-col gap-4 px-6 py-5" novalidate>
+
+                <!-- Fields Name + Last Name -->
+                <div class="flex items-center justify-between gap-2">
+                    <div class="w-full">
+                        <label for="employeeName" class="mb-1.5 block text-sm font-medium text-slate-700">
+                            Name
+                        </label>
+                        <input id="employeeName" name="name" type="text" maxlength="40" placeholder="ej. Wilson"
+                            class="w-full rounded-lg bg-slate-50 border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                
+                    <div class="w-full">
+                        <label for="employeeLastName" class="mb-1.5 block text-sm font-medium text-slate-700">
+                            Last Name
+                        </label>
+                        <input id="employeeLastName" name="lastName" type="text" maxlength="40" placeholder="ej. Strana"
+                            class="w-full rounded-lg bg-slate-50 border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <!-- Fields Cellphone + Age -->
+                <div class="flex items-center justify-between gap-3">
+                    <div class="w-full">
+                        <label for="employeeCellphone" class="mb-1.5 block text-sm font-medium text-slate-700">
+                            Cellphone
+                        </label>
+                        <input id="employeeCellphone" name="cellphone" type="text" maxlength="40" placeholder="ej. 33 98 23 ..."
+                            class="w-full rounded-lg bg-slate-50 border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                
+                    <div class="w-full">
+                        <label for="EmployeeAge" class="mb-1.5 block text-sm font-medium text-slate-700">
+                            Age
+                        </label>
+                        <input id="EmployeeAge" name="age" type="number" min="18" max="99" placeholder="ej. 25"
+                            class="w-full rounded-lg bg-slate-50 border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="employeeEmail" class="mb-1.5 block text-sm font-medium text-slate-700">
+                        Email
+                    </label>
+                    <input id="employeeEmail" name="email" type="email" maxlength="40" placeholder="ej. your-company.com"
+                        class="w-full rounded-lg bg-slate-50 border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label for="employeeDepartment" class="mb-1.5 block text-sm font-medium text-slate-700">
+                        Department
+                    </label>
+                    <select
+                        id="employeeDepartment"
+                        name="departmentId"
+                        class="w-full rounded-lg bg-slate-50 border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                        <option value="">Select a department</option>
+                    </select>
+                </div>
+
+                <!-- Actions -->
+                <div class="mt-2 flex justify-end gap-3">
+                    <button
+                        type="button"
+                        data-close
+                        class="cursor-pointer rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        class="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                        Create department
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="./src/js/newEmployee.js" type="module"></script>
+    <script src="./src//js/listEmployees.js" type="module"></script>
+</body>
+</html>

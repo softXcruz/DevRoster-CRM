@@ -1,0 +1,131 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "IT",
+      "description": "Frontend, Backend, Fullstack, DevOps, Testing"
+    },
+    {
+      "id": 2,
+      "name": "Manufacturing",
+      "description": "Lead, supervisor, production operators, manager"
+    },
+    {
+      "id": 3,
+      "name": "Human resources",
+      "description": "Team recruitment and well-being"
+    },
+    {
+      "id": 4,
+      "name": "Product",
+      "description": "Product strategy and management"
+    },
+    {
+      "id": 5,
+      "name": "Design",
+      "description": "User experience and interface design"
+    },
+    {
+      "id": 6,
+      "name": "Quality",
+      "description": "Quality assurance and process audits"
+    },
+    {
+      "id": 7,
+      "name": "Finance",
+      "description": "Budgeting, payroll and accounting"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "name": "Valeria",
+      "lastName": "Montes",
+      "cellphone": "5550100101",
+      "age": 27,
+      "email": "valeria.montes@example.com",
+      "departmentId": 1
+    },
+    {
+      "id": 2,
+      "name": "Diego",
+      "lastName": "Ramírez",
+      "cellphone": "5550100102",
+      "age": 31,
+      "email": "diego.ramirez@example.com",
+      "departmentId": 1
+    },
+    {
+      "id": 3,
+      "name": "Camila",
+      "lastName": "Herrera",
+      "cellphone": "5550100103",
+      "age": 24,
+      "email": "camila.herrera@example.com",
+      "departmentId": 1
+    },
+    {
+      "id": 4,
+      "name": "Mateo",
+      "lastName": "Salgado",
+      "cellphone": "5550100104",
+      "age": 35,
+      "email": "mateo.salgado@example.com",
+      "departmentId": 1
+    },
+    {
+      "id": 5,
+      "name": "Renata",
+      "lastName": "Ibarra",
+      "cellphone": "5550100105",
+      "age": 29,
+      "email": "renata.ibarra@example.com",
+      "departmentId": 2
+    },
+    {
+      "id": 6,
+      "name": "Joaquín",
+      "lastName": "Vela",
+      "cellphone": "5550100106",
+      "age": 42,
+      "email": "joaquin.vela@example.com",
+      "departmentId": 2
+    },
+    {
+      "id": 7,
+      "name": "Ximena",
+      "lastName": "Orozco",
+      "cellphone": "5550100107",
+      "age": 33,
+      "email": "ximena.orozco@example.com",
+      "departmentId": 2
+    },
+    {
+      "id": 8,
+      "name": "Lucía",
+      "lastName": "Fuentes",
+      "cellphone": "5550100108",
+      "age": 38,
+      "email": "lucia.fuentes@example.com",
+      "departmentId": 3
+    },
+    {
+      "id": 9,
+      "name": "Andrés",
+      "lastName": "Paredes",
+      "cellphone": "5550100109",
+      "age": 30,
+      "email": "andres.paredes@example.com",
+      "departmentId": 3
+    },
+    {
+      "id": 10,
+      "name": "Sofía",
+      "lastName": "Lozano",
+      "cellphone": "5550100110",
+      "age": 28,
+      "email": "sofia.lozano@example.com",
+      "departmentId": 4
+    }
+  ]
+}
