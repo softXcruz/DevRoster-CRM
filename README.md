@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/badge/json--server-000000?logo=json&logoColor=white" alt="json-server">
 </p>
 
-![DevRoster employees view](./public/devroster-employees.png)
+![DevRoster employees view](./src/img/employeesUI.png)
 
 ## About
 
