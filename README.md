@@ -40,25 +40,6 @@ I built this to practice a complete CRUD without a framework: two related resour
 - json-server 0.17.4 as a fake REST API
 - Inter, loaded from Google Fonts
 
-## Running it locally
-
-You need Node 20 or newer.
-
-```bash
-git clone https://github.com/softXcruz/DevRoster.git
-cd DevRoster
-npm install
-```
-
-Start the API and the Tailwind compiler, each in its own terminal:
-
-```bash
-npm run api   # json-server on http://localhost:3000
-npm run css   # Tailwind in watch mode
-```
-
-Then open `index.html` with a local server such as the VS Code **Live Server** extension. ES modules do not work when the file is opened directly from the file system.
-
 ## How it's put together
 
 Project structure
@@ -99,18 +80,6 @@ The API files only talk to the server. The other files only touch the DOM. Depen
 
 **The modals live in the HTML.** They are hidden with Tailwind's `hidden` class and JavaScript only toggles it. It keeps the markup readable and the styling in one place.
 
-## Limitations
-
-- json-server is a development tool. There is no authentication, validation on the server or real database.
-- Referential integrity is only enforced in the interface. Editing `db.json` by hand can leave employees pointing to a department that no longer exists, and the table shows them as "No department".
-- No pagination, search or sorting yet.
-- The app needs the API running. A static host alone, such as GitHub Pages, will show the error state.
-
-## Roadmap
-
-- Search and filter employees by department.
-- Replace the native `confirm()` with a styled confirmation modal.
-- Field-level validation messages under each input.
 
 ## Credits
 
